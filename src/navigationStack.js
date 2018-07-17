@@ -2,7 +2,7 @@ import { StackNavigator } from 'react-navigation'
 import FirstPage from './FirstPage'
 import SecondPage from './SecondPage'
 
-const navigationStack = StackNavigator({
+const NavigationStack = StackNavigator({
   screen1: {
     screen: FirstPage
   },
@@ -10,4 +10,5 @@ const navigationStack = StackNavigator({
     screen: SecondPage
   }
 })
-export default navigationStack
+
+export default NavigationStack

@@ -13,13 +13,17 @@ import {
 } from 'react-native'
 import {goNext} from './store'
 import { connect } from 'react-redux'
-
+import { bindActionCreators, createStore } from 'redux'
 class FirstPage extends Component {
+  next () {
+    console.log(this.props)
+    this.props.goNext()
+  }
   render () {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Welcome to Redux Navigation!</Text>
-        <TouchableOpacity onPress={() => { this.props.goNext() }}><Text style={styles.button}>Next</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => { this.next() }}><Text style={styles.button}>Next</Text></TouchableOpacity>
       </View>
     )
   }
@@ -45,8 +49,6 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapDispatchToProps = {
-  goNext
-}
+const mapDispatchToProps = dispatch => (bindActionCreators({goNext}, dispatch))
 
 export default connect(null, mapDispatchToProps)(FirstPage)

@@ -1,5 +1,3 @@
-
-import NavigationStack from './navigationStack'
 import createLogger from 'redux-logger'
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import {
@@ -7,6 +5,8 @@ import {
   createReactNavigationReduxMiddleware,
   createNavigationReducer
 } from 'react-navigation-redux-helpers'
+import { NavigationActions, StackNavigator } from 'react-navigation'
+import NavigationStack from './navigationStack'
 // action type
 export const ACTION_NEXT = 'NEXT'
 // action creator
@@ -27,6 +27,9 @@ const nav = (state = initialState, action) => {
   switch (action.type) {
     case ACTION_NEXT: {
       return NavigationStack.router.getStateForAction(ActionForSecondPage, state)
+    }
+    case 'Navigation/BACK': {
+      return NavigationStack.router.getStateForAction(NavigationActions.back(), state)
     }
   }
   return state
