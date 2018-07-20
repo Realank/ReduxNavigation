@@ -16,34 +16,8 @@ import {
 import { BackHandler } from 'react-native'
 import { connect, Provider } from 'react-redux'
 import { store } from './store'
+import { store2 } from './store2'
 import NavigationStack from './navigationStack'
-
-// class AppNavigation extends Component {
-//   componentDidMount () {
-//     BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
-//   }
-//
-//   componentWillUnmount () {
-//     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
-//   }
-//
-//   onBackPress = () => {
-//     const { dispatch, navigationState } = this.props
-//     if (navigationState.stateForLoggedIn.index <= 1) {
-//       BackHandler.exitApp()
-//       return
-//     }
-//     dispatch(NavigationActions.back())
-//     return true
-//   };
-//
-//   render () {
-//     const {navigationState, dispatch} = this.props
-//     return (
-//       <NavigationStack navigation={addNavigationHelpers({dispatch, state: navigationState})} />
-//     )
-//   }
-// }
 
 const AppNavigation = reduxifyNavigator(NavigationStack, 'root')
 
@@ -56,9 +30,21 @@ const mapStateToProps = state => {
 const HighOrderAppNavigation = connect(mapStateToProps)(AppNavigation)
 
 export default class App extends Component {
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
+  }
+
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
+  }
+
+  onBackPress = () => {
+    store2.dispatch(NavigationActions.back())
+    return true
+  };
   render () {
     return (
-      <Provider store={store}>
+      <Provider store={store2}>
         <HighOrderAppNavigation />
       </Provider>
     )

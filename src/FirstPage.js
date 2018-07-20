@@ -16,8 +16,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators, createStore } from 'redux'
 class FirstPage extends Component {
   next () {
-    console.log(this.props)
-    this.props.goNext()
+    console.log(this.props.navigation)
+    // this.props.goNext()
+    this.props.navigation.push('screen2') // store2
   }
   render () {
     return (
